@@ -1,10 +1,9 @@
 # My Journey Deploying Nexus as a Docker Container on DigitalOcean
 
-Hey everyone! This README is a summary of my experience deploying Nexus Repository Manager as a Docker container on a DigitalOcean Droplet. I'll outline the key steps I took to get everything up and running, and I've also included some suggestions for visuals you could use to make it even more illustrative.
+This is a summary of my experience deploying Nexus Repository Manager as a Docker container on a DigitalOcean Droplet. I'll outline the key steps I took to get everything up and running.
 
-## Project Goal
+![Diagram](https://github.com/Princeton45/nexus-docker-container/blob/main/images/diagram.jpg)
 
-My aim was to have a functional Nexus Repository Manager running in a Docker container, hosted on a DigitalOcean Droplet. This provides a reliable and easily manageable way to store and manage artifacts.
 
 ## Technologies I Used
 
