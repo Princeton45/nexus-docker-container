@@ -4,7 +4,6 @@ This is a summary of my experience deploying Nexus Repository Manager as a Docke
 
 ![Diagram](https://github.com/Princeton45/nexus-docker-container/blob/main/images/diagram.jpg)
 
-
 ## Technologies I Used
 
 *   **Docker:** To containerize the Nexus application, making it portable and easy to deploy.
@@ -14,38 +13,41 @@ This is a summary of my experience deploying Nexus Repository Manager as a Docke
 
 ## Steps I Took to Deploy Nexus
 
-Here's how I set up Nexus on DigitalOcean:
-
 ### 1. Created a DigitalOcean Droplet
 
 First, I needed a server to work with. I created a new Droplet on DigitalOcean, which is essentially a virtual server. I chose Ubuntu as the operating system and selected a Droplet size suitable for running Nexus.
 
-*   **Suggestions for Visuals:**
-    *   **Picture 1:** A screenshot of the DigitalOcean dashboard showing my newly created Droplet, highlighting its IP address and specifications.
+![droplet](https://github.com/Princeton45/nexus-docker-container/blob/main/images/droplet.png)
+
+I also needed to configure the proper firewall settings on the droplet.
+
+![firewall](https://github.com/Princeton45/nexus-docker-container/blob/main/images/firewall.png)
 
 ### 2. Set Up Docker on the Droplet
 
 With the Droplet ready, I installed Docker on it. This allowed me to run containerized applications, including Nexus.
 
-*   **Suggestions for Visuals:**
-    *   **Picture 2:** My terminal showing the output of `docker --version`, confirming that Docker was successfully installed on the Droplet.
+```bash
+apt update
+snap install docker
+```
+![version](https://github.com/Princeton45/nexus-docker-container/blob/main/images/docker-version.png)
 
 ### 3. Ran Nexus as a Docker Container
 
 Finally, I used Docker to pull the official Nexus image from Docker Hub and started it as a container. I also made sure to map the necessary ports and volumes so that Nexus could function correctly and its data would persist.
 
-*   **Suggestions for Visuals:**
-    *   **Picture 3:** My terminal showing the `docker run` command I used to start the Nexus container, highlighting the port and volume mappings.
-    *   **Picture 4:** A screenshot of the `docker ps` output, showing the running Nexus container.
+```bash
+docker volume create --name nexus-data
+docker run -d -p 8081:8081 --name nexus -v nexus-data:/nexus-data sonatype/nexus3
+```
+
+The container is now running:
+
+![running](https://github.com/Princeton45/nexus-docker-container/blob/main/images/running.png)
 
 ### 4. Accessed the Nexus UI
 
-After starting the container, I accessed the Nexus web interface through my browser using the Droplet's IP address and the port I mapped during the container setup. I retrieved the initial admin password and logged in, completing the initial Nexus setup.
+After starting the container, I accessed the Nexus web interface through my browser using the Droplet's IP address and the port I mapped during the container setup.
 
-*   **Suggestions for Visuals:**
-    *   **Picture 5:** My browser displaying the Nexus login page.
-    *   **Picture 6:** The Nexus UI after successfully logging in, showing the various repositories and configuration options.
-
-## Conclusion
-
-That's it! I now have Nexus Repository Manager successfully deployed and accessible, thanks to Docker and DigitalOcean. This setup is ideal for managing artifacts in my development workflow. I hope sharing my experience helps you in your own deployments. Happy coding!
+![nexus](https://github.com/Princeton45/nexus-docker-container/blob/main/images/nexus_ui.png)
